@@ -46,7 +46,7 @@ export default function MetricToCm() {
 
   return (
     <div className="p-4 grid gap-4">
-      <div>
+      <div className="grid gap-2">
         <Label>Feet</Label>
         <Input
           placeholder="ft"
@@ -55,7 +55,7 @@ export default function MetricToCm() {
           onChange={handleInputChange("feet")}
         />
       </div>
-      <div>
+      <div className="grid gap-2">
         <Label>Inches</Label>
         <div className="flex items-center gap-2">
           <Input
@@ -82,7 +82,9 @@ export default function MetricToCm() {
           </div>
         </div>
       </div>
-      <MetricToCmResult cm={cm} />
+      <div className="pt-6">
+        <MetricToCmResult cm={cm} />
+      </div>
     </div>
   );
 }

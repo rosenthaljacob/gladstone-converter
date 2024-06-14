@@ -29,17 +29,19 @@ export default function CmToMetricResult({
 
   return (
     <Card className="p-6 h-32 flex items-center">
-      <p className="w-full text-center text-2xl">
-        <span className="">{imperial?.feet ?? "-"}</span>
-        <span className="text-lg text-muted-foreground">ft</span>{" "}
-        <span>{imperial?.inches ?? "-"}</span>
-        <span>
-          <sup>{fraction?.numerator ?? "-"}</sup>
-          <span className="text-muted-foreground">&frasl;</span>
-          <sub>{fraction?.denominator ?? "-"}</sub>
-        </span>
-        <span className="text-lg text-muted-foreground">in</span>
-      </p>
+      <div>
+        <p className="w-full text-center text-2xl">
+          <span className="">{imperial?.feet ?? "-"}</span>
+          <span className="text-lg text-muted-foreground">ft</span>{" "}
+          <span>{imperial?.inches ?? "-"}</span>
+          <span>
+            <sup>{fraction?.numerator ?? "-"}</sup>
+            <span className="text-muted-foreground">&frasl;</span>
+            <sub>{fraction?.denominator ?? "-"}</sub>
+          </span>
+          <span className="text-lg text-muted-foreground">in</span>
+        </p>
+      </div>
     </Card>
   );
 }

@@ -25,7 +25,7 @@ export function findClosestFraction(decimal: number, maxDenominator = 64) {
       const fraction = numerator / denominator;
       const difference = decimal - fraction;
 
-      if (difference < Math.abs(acc.difference)) {
+      if (Math.abs(difference) < Math.abs(acc.difference)) {
         return {
           numerator,
           denominator,
