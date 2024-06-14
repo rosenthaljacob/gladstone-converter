@@ -29,8 +29,8 @@ export default function CmToMetricResult({
 
   return (
     <Card className="p-6 h-32 flex items-center">
-      <div>
-        <p className="w-full text-center text-2xl">
+      <div className="grid gap-2 mx-auto">
+        <p className="w-full text-center text-2xl ">
           <span className="">{imperial?.feet ?? "-"}</span>
           <span className="text-lg text-muted-foreground">ft</span>{" "}
           <span>{imperial?.inches ?? "-"}</span>
@@ -41,6 +41,12 @@ export default function CmToMetricResult({
           </span>
           <span className="text-lg text-muted-foreground">in</span>
         </p>
+        {fraction?.difference !== 0 && (
+          <p className="text-xs text-primary">
+            {(fraction?.difference ?? 0) > 0 ? "+" : "-"}
+            {Math.abs(fraction?.difference ?? 0).toFixed(6)} of an inch
+          </p>
+        )}
       </div>
     </Card>
   );
