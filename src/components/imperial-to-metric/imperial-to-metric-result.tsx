@@ -7,15 +7,15 @@ import {
 import { Card } from "../ui/card";
 
 interface ResultDisplayProps {
-  imperialValue: number | null;
+  millimeterValue: number | null;
   maxDenominator: number;
 }
 
 export default function ImperialToMetricResult({
-  imperialValue,
+  millimeterValue,
   maxDenominator,
 }: ResultDisplayProps) {
-  if (imperialValue === null) {
+  if (millimeterValue === null) {
     return (
       <Card className="p-6 h-32 flex items-center">
         <p className="w-full text-center text-muted-foreground text-lg">
@@ -25,8 +25,8 @@ export default function ImperialToMetricResult({
     );
   }
 
-  const imperial = imperialValue
-    ? convertMillimetersToImperial(imperialValue)
+  const imperial = millimeterValue
+    ? convertMillimetersToImperial(millimeterValue)
     : null;
   const fraction = imperial
     ? findClosestFraction(imperial.decimal, maxDenominator)
