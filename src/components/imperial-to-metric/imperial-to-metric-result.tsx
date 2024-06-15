@@ -9,17 +9,19 @@ import { Card } from "../ui/card";
 interface ResultDisplayProps {
   millimeterValue: number | null;
   maxDenominator: number;
+  unitName: string;
 }
 
 export default function ImperialToMetricResult({
   millimeterValue,
   maxDenominator,
+  unitName,
 }: ResultDisplayProps) {
   if (millimeterValue === null) {
     return (
       <Card className="p-6 h-32 flex items-center">
         <p className="w-full text-center text-muted-foreground text-lg">
-          Please enter a value in centimeters
+          Please enter a value in {unitName}
         </p>
       </Card>
     );

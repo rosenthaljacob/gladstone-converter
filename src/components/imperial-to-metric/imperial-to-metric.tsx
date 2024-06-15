@@ -62,6 +62,7 @@ export default function ImperialToMetric() {
         </div>
       </div>
       <ImperialToMetricResult
+        unitName={unit.name.toLocaleLowerCase()}
         millimeterValue={millimeters}
         maxDenominator={maxDenominator}
       />
