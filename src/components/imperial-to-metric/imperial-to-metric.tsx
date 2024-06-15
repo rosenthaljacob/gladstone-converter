@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import CmToMetricResult from "./cm-to-metric-result";
+import ImperialToMetricResult from "./imperial-to-metric-result";
 import DenominatorSelector from "./denominator-selector";
 
-export default function CmToMetric() {
+export default function ImperialToMetric() {
   const [input, setInput] = useState<number | null>(null);
   const [maxDenominator, setMaxDenominator] = useState(16);
 
@@ -27,7 +27,10 @@ export default function CmToMetric() {
           onChange={handleInputChange}
         />
       </div>
-      <CmToMetricResult imperialValue={input} maxDenominator={maxDenominator} />
+      <ImperialToMetricResult
+        imperialValue={input}
+        maxDenominator={maxDenominator}
+      />
     </div>
   );
 }

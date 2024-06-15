@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import MetricToCmResult from "./metric-to-cm-result";
+import MetricToImperialResult from "./metric-to-imperial-result";
 
-interface MetricToCmInputState {
+interface MetricToImperialInputState {
   feet: number | null;
   inches: number | null;
   numerator: number | null;
   denominator: number | null;
 }
 
-export default function MetricToCm() {
-  const [input, setInput] = useState<MetricToCmInputState>({
+export default function MetricToImperial() {
+  const [input, setInput] = useState<MetricToImperialInputState>({
     feet: null,
     inches: null,
     numerator: null,
@@ -19,7 +19,7 @@ export default function MetricToCm() {
   });
 
   const handleInputChange =
-    (key: keyof MetricToCmInputState) =>
+    (key: keyof MetricToImperialInputState) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
       setInput({
@@ -83,7 +83,7 @@ export default function MetricToCm() {
         </div>
       </div>
       <div className="pt-6">
-        <MetricToCmResult cm={cm} />
+        <MetricToImperialResult cm={cm} />
       </div>
     </div>
   );

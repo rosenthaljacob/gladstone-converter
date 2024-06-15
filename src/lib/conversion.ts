@@ -1,7 +1,7 @@
-export function convertCmToImperial(cm: number) {
-  const CM_TO_FOOT = 0.0328084;
+export function convertMillimetersToImperial(mm: number) {
+  const CM_TO_FOOT = 0.00328084;
 
-  const feet = cm * CM_TO_FOOT;
+  const feet = mm * CM_TO_FOOT;
   const feetFloor = Math.floor(feet);
 
   const inches = (feet - feetFloor) * 12;

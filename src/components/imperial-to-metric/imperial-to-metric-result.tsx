@@ -1,6 +1,9 @@
 import React from "react";
 
-import { convertCmToImperial, findClosestFraction } from "@/lib/conversion";
+import {
+  convertMillimetersToImperial,
+  findClosestFraction,
+} from "@/lib/conversion";
 import { Card } from "../ui/card";
 
 interface ResultDisplayProps {
@@ -8,7 +11,7 @@ interface ResultDisplayProps {
   maxDenominator: number;
 }
 
-export default function CmToMetricResult({
+export default function ImperialToMetricResult({
   imperialValue,
   maxDenominator,
 }: ResultDisplayProps) {
@@ -22,7 +25,9 @@ export default function CmToMetricResult({
     );
   }
 
-  const imperial = imperialValue ? convertCmToImperial(imperialValue) : null;
+  const imperial = imperialValue
+    ? convertMillimetersToImperial(imperialValue)
+    : null;
   const fraction = imperial
     ? findClosestFraction(imperial.decimal, maxDenominator)
     : null;
