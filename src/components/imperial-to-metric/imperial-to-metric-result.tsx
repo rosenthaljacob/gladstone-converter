@@ -37,16 +37,18 @@ export default function ImperialToMetricResult({
   return (
     <Card className="p-6 h-32 flex items-center">
       <div className="grid gap-2 mx-auto">
-        <p className="w-full text-center text-2xl ">
+        <p className="w-full text-center text-2xl flex items-end">
           <span className="">{imperial?.feet ?? "-"}</span>
-          <span className="text-lg text-muted-foreground">ft</span>{" "}
+          <span className="text-lg text-muted-foreground px-0.5">ft</span>&nbsp;
           <span>{imperial?.inches ?? "-"}</span>
-          <span>
-            <sup>{fraction?.numerator ?? "-"}</sup>
-            <span className="text-muted-foreground">&frasl;</span>
-            <sub>{fraction?.denominator ?? "-"}</sub>
-          </span>
-          <span className="text-lg text-muted-foreground">in</span>
+          {fraction?.numerator !== 0 && (
+            <span className="flex flex-col text-[0.75rem] leading-[1rem] w-4 pl-0.5">
+              <span>{fraction?.numerator ?? "-"}</span>
+              <div className="border-b border-muted-foreground"></div>
+              <span>{fraction?.denominator ?? "-"}</span>
+            </span>
+          )}
+          <span className="text-lg text-muted-foreground pl-0.5">in</span>
         </p>
         {fraction?.difference !== 0 && (
           <p className="text-xs text-primary">
