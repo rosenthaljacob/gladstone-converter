@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
-import CmToMetric from "@/components/cm-to-metric/cm-to-metric";
-import MetricToCm from "@/components/metric-to-cm/metric-to-cm";
+import MetricToImperial from "@/components/metric-to-imperial/metric-to-imperial";
+import ImperialToMetric from "@/components/imperial-to-metric/imperial-to-metric";
 
 export default function Home() {
   return (
@@ -22,18 +20,18 @@ export default function Home() {
           <div className="grid gap-4">
             <TabsList>
               <TabsTrigger className="flex-1" value="cm-to-metric">
-                cm to Gladstone
+                Metric to Gladstone
               </TabsTrigger>
               <TabsTrigger className="flex-1" value="metric-to-cm">
-                Gladstone to cm
+                Gladstone to Metric
               </TabsTrigger>
             </TabsList>
             <Card>
               <TabsContent value="cm-to-metric">
-                <CmToMetric />
+                <MetricToImperial />
               </TabsContent>
               <TabsContent value="metric-to-cm">
-                <MetricToCm />
+                <ImperialToMetric />
               </TabsContent>
             </Card>
           </div>

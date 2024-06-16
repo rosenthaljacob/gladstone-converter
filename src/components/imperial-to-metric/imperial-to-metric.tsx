@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import MetricToCmResult from "./metric-to-cm-result";
+import ImperialToMetricResult from "./imperial-to-metric-result";
 
-interface MetricToCmInputState {
+interface ImperialToMetricInputState {
   feet: number | null;
   inches: number | null;
   numerator: number | null;
   denominator: number | null;
 }
 
-export default function MetricToCm() {
-  const [input, setInput] = useState<MetricToCmInputState>({
+export default function ImperialToMetric() {
+  const [input, setInput] = useState<ImperialToMetricInputState>({
     feet: null,
     inches: null,
     numerator: null,
@@ -19,7 +19,7 @@ export default function MetricToCm() {
   });
 
   const handleInputChange =
-    (key: keyof MetricToCmInputState) =>
+    (key: keyof ImperialToMetricInputState) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
       setInput({
@@ -49,7 +49,6 @@ export default function MetricToCm() {
       <div className="grid gap-2">
         <Label>Feet</Label>
         <Input
-          placeholder="ft"
           type="number"
           value={input.feet ?? ""}
           onChange={handleInputChange("feet")}
@@ -60,7 +59,6 @@ export default function MetricToCm() {
         <div className="flex items-center gap-2">
           <Input
             className="flex-1"
-            placeholder="in"
             type="number"
             value={input.inches ?? ""}
             onChange={handleInputChange("inches")}
@@ -83,7 +81,7 @@ export default function MetricToCm() {
         </div>
       </div>
       <div className="pt-6">
-        <MetricToCmResult cm={cm} />
+        <ImperialToMetricResult cm={cm} />
       </div>
     </div>
   );
