@@ -2,70 +2,87 @@ import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import ImperialToMetricResult from "./imperial-to-metric-result";
-import DenominatorSelector from "./denominator-selector";
-import SelectMetricUnit from "./select-metric-unit";
 
-import { METRIC_UNITS } from "@/lib/utils";
-
-type UnitAbb = (typeof METRIC_UNITS)[number]["abbreviation"];
+interface ImperialToMetricInputState {
+  feet: number | null;
+  inches: number | null;
+  numerator: number | null;
+  denominator: number | null;
+}
 
 export default function ImperialToMetric() {
-  const [millimeters, setMillimeters] = useState<number | null>(null);
-  const [maxDenominator, setMaxDenominator] = useState(16);
+  const [input, setInput] = useState<ImperialToMetricInputState>({
+    feet: null,
+    inches: null,
+    numerator: null,
+    denominator: null,
+  });
 
-  const [unitAbb, setUnitAbb] = useState<UnitAbb>(METRIC_UNITS[0].abbreviation);
-  const unit = METRIC_UNITS.find((u) => u.abbreviation === unitAbb)!;
+  const handleInputChange =
+    (key: keyof ImperialToMetricInputState) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setInput({
+        ...input,
+        [key]: value === "" ? null : Number(value),
+      });
+    };
 
-  const unitToMillimeters = (value: number) => value * unit.lengthInMillimeters;
-  const millimetersToUnit = (value: number) => value / unit.lengthInMillimeters;
+  const cm = (() => {
+    const FEET_TO_CM = 30.48;
+    const INCHES_TO_CM = FEET_TO_CM / 12;
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setMillimeters(value === "" ? null : unitToMillimeters(Number(value)));
-  };
+    const feetCm = (input.feet ?? 0) * FEET_TO_CM;
+    const inchesCm = (input.inches ?? 0) * INCHES_TO_CM;
+    const fractionCm =
+      ((input.numerator ?? 0) / (input.denominator ?? 0)) * INCHES_TO_CM;
 
-  const handleUnitChange = (value: UnitAbb) => {
-    const newUnit = METRIC_UNITS.find((u) => u.abbreviation === value)!;
-
-    // Convert the current millimeter value to the new unit
-    if (millimeters !== null) {
-      setMillimeters(
-        (millimeters / unit.lengthInMillimeters) * newUnit.lengthInMillimeters
-      );
-    }
-
-    setUnitAbb(value);
-  };
-
-  const inputValue = (() => {
-    if (millimeters === null) return "";
-
-    return millimetersToUnit(millimeters);
+    return (
+      feetCm +
+      inchesCm +
+      (isNaN(fractionCm) || fractionCm === Infinity ? 0 : fractionCm)
+    );
   })();
 
   return (
-    <div className="grid gap-4 p-4">
-      <DenominatorSelector
-        denominator={maxDenominator}
-        setDenominator={setMaxDenominator}
-      />
+    <div className="p-4 grid gap-4">
       <div className="grid gap-2">
-        <Label>Length</Label>
-        <div className="flex gap-2">
+        <Label>Feet</Label>
+        <Input
+          type="number"
+          value={input.feet ?? ""}
+          onChange={handleInputChange("feet")}
+        />
+      </div>
+      <div className="grid gap-2">
+        <Label>Inches</Label>
+        <div className="flex items-center gap-2">
           <Input
             className="flex-1"
             type="number"
-            value={inputValue}
-            onChange={handleInputChange}
+            value={input.inches ?? ""}
+            onChange={handleInputChange("inches")}
           />
-          <SelectMetricUnit unitAbb={unitAbb} setUnitAbb={handleUnitChange} />
+          <div className="grid gap-2 flex-1">
+            <Input
+              placeholder="numerator"
+              type="number"
+              value={input.numerator ?? ""}
+              onChange={handleInputChange("numerator")}
+            />
+            <span className="border-b"></span>
+            <Input
+              placeholder="denominator"
+              type="number"
+              value={input.denominator ?? ""}
+              onChange={handleInputChange("denominator")}
+            />
+          </div>
         </div>
       </div>
-      <ImperialToMetricResult
-        unitName={unit.name.toLocaleLowerCase()}
-        millimeterValue={millimeters}
-        maxDenominator={maxDenominator}
-      />
+      <div className="pt-6">
+        <ImperialToMetricResult cm={cm} />
+      </div>
     </div>
   );
 }

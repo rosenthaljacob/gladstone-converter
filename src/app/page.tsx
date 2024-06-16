@@ -2,8 +2,8 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
+import MetricToImperial from "@/components/metric-to-imperial/metric-to-imperial";
 import ImperialToMetric from "@/components/imperial-to-metric/imperial-to-metric";
-import MetricToImperial from "@/components/metric-to-imperial/metric-to-imperal";
 
 export default function Home() {
   return (
@@ -28,10 +28,10 @@ export default function Home() {
             </TabsList>
             <Card>
               <TabsContent value="cm-to-metric">
-                <ImperialToMetric />
+                <MetricToImperial />
               </TabsContent>
               <TabsContent value="metric-to-cm">
-                <MetricToImperial />
+                <ImperialToMetric />
               </TabsContent>
             </Card>
           </div>
