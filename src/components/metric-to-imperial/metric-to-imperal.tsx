@@ -49,7 +49,6 @@ export default function MetricToImperial() {
       <div className="grid gap-2">
         <Label>Feet</Label>
         <Input
-          placeholder="ft"
           type="number"
           value={input.feet ?? ""}
           onChange={handleInputChange("feet")}
@@ -60,7 +59,6 @@ export default function MetricToImperial() {
         <div className="flex items-center gap-2">
           <Input
             className="flex-1"
-            placeholder="in"
             type="number"
             value={input.inches ?? ""}
             onChange={handleInputChange("inches")}
